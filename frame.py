@@ -86,6 +86,7 @@ class MainApplication():
                 io.imsave(out.name, self.cartoon.style)
             else:
                 add_extension = out.name + '.jpg'
+                io.imsave(add_extension, self.cartoon.style)
 
     def sigma(self):
         # function which will get the data from the input fields

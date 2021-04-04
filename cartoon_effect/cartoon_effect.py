@@ -16,13 +16,12 @@ import re
 from matplotlib import pyplot as plt
 from matplotlib.gridspec import GridSpec
 class CartoonEffect:
-    def __init__(self, sigx=0.8, sigb=0.6, p=0.98, k=1.6, style=1,color_style = 1, epsilon=0, tau=0.98, n=20, phi = 10):
+    def __init__(self, sigx=0.8, sigb=0.6, p=0.98, k=1.6, style=1, epsilon=0, tau=0.98, n=20, phi = 10):
         self.sigx = sigx
         self.sigb = sigb
         self.p = p
         self.k = k
         self.style = style
-        self.color_style = color_style
         self.epsilon = epsilon
         self.n = n
         self.tau = tau
@@ -71,7 +70,7 @@ class CartoonEffect:
         #         c[mask, :] = im_float[mask, :].mean(axis=0)
         #     c = c / c.max()
         # Performing Color Quantization using K-Means Algorithm.
-        elif img.ndim == 3:
+        if img.ndim == 3:
             img = img_as_float(img)
             # reshaping the pixels matrix
             pixel = reshape(img,(img.shape[0]*img.shape[1],3))
@@ -96,7 +95,7 @@ class CartoonEffect:
         xdog = xdog.astype(np.float32) / 255
         c = self.stylize(img)
         if c.ndim == 2:
-            self.style = c_gray * xdog
+            self.style = c * xdog
             self.style = np.clip(self.style,0, 1)
             self.style = self.style * 255
         elif c.ndim == 3:
