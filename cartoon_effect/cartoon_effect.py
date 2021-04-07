@@ -43,7 +43,6 @@ class CartoonEffect:
         # using Equation (5) to threshold
         e = 1 + np.tanh(self.p * (img - eps))
         e[e >= 1] = 1
-        e[e <= 0] = 0 # potentially remove?
         return e.astype(np.uint8) * 255
 
 
