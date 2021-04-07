@@ -44,6 +44,8 @@ class MainApplication():
         main_label.configure(background='#364156', foreground='white',font=('calibri',11,'bold'))
         main_label.pack(side=tk.TOP, pady=50)
         tk.mainloop()
+
+
     def error_message(self, txt):
         self.error = tk.Tk()
         self.error.title("Error")
@@ -51,6 +53,8 @@ class MainApplication():
         err_label = tk.Label(self.error, text= txt)
         err_label.configure(background='#364156', foreground='white',font=('calibri',11,'bold'))
         err_label.place(x=150, y=25, anchor='center')
+
+
     def upload(self):
         self.sub_window = tk.Tk()
         im_loc = tk.filedialog.askopenfilenames(parent=self.sub_window, title='Choose an Image')
@@ -61,12 +65,15 @@ class MainApplication():
             self.cartoon.cartoonify(img)
         else:
             self.error_message("Please select an image with a proper format.")
+
         '''This function creates an openfiledialog box from tkinter
         which the user can use to select an image. Once an image is chosen
         it will then be passed to the cartoonify function where it will be converted.
         Next the image will be passed to a display function where it will be shown on the screen.
         Input: None
         output: the converted image.'''
+
+
     def save(self):
         '''This function will take the cartoonified image and will give the option to save the image
         to a file.
@@ -86,6 +93,7 @@ class MainApplication():
                 io.imsave(add_extension, self.cartoon.style)
             else:
                 raise TypeError("Unknown")
+
 
     def sigma(self):
         # function which will get the data from the input fields

@@ -15,6 +15,8 @@ import sys,os
 import re
 from matplotlib import pyplot as plt
 from matplotlib.gridspec import GridSpec
+
+
 class CartoonEffect:
     def __init__(self, sigx=0.8, sigb=0.6, p=0.98, k=1.6, style=1, epsilon=0, tau=0.98, n=20, phi = 10):
         self.sigx = sigx
@@ -26,11 +28,15 @@ class CartoonEffect:
         self.n = n
         self.tau = tau
         self.phi = phi
+
+
     def dog_filter(self, img):
         gauss1 = filters.gaussian(img, self.sigx)
         gauss2 = filters.gaussian(img, self.k * self.sigx)
         # using Equation (4) to produce the difference of gaussian
         return gauss1 - self. tau * gauss2
+
+
     def xdog_filter(self, img):
         eps = self.epsilon
         img = img / img.max()
@@ -39,6 +45,8 @@ class CartoonEffect:
         e[e >= 1] = 1
         e[e <= 0] = 0 # potentially remove?
         return e.astype(np.uint8) * 255
+
+
     def stylize(self, img):
         new_img = img.copy()
         if img.ndim == 3:
@@ -82,6 +90,7 @@ class CartoonEffect:
             c = centroids[centers_idx]
             c = c / c.max()
             return c.astype(np.float32)
+
 
     ''' This function actually perfroms the cartoonify of an image'''
     def cartoonify(self, img):

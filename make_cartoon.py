@@ -15,4 +15,6 @@ import frame
 from matplotlib import pyplot as plt
 from matplotlib.gridspec import GridSpec
 from cartoon_effect import cartoon_effect
-app = frame.MainApplication()
+
+if __name__ == '__main__':
+    app = frame.MainApplication()
