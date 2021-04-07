@@ -114,10 +114,16 @@ class CartoonEffect:
         ax0.set_title('Original Image')
         ax1.imshow(xdog, cmap='gray')
         ax1.set_title('XDoG')
-        ax2.imshow(c)
-        ax2.set_title('C(x,y)')
-        ax3.imshow(self.style)
-        ax3.set_title('Cartoon')
+        if c.ndim == 2:
+            ax2.imshow(c, cmap='gray')
+            ax2.set_title('C(x,y)')
+            ax3.imshow(self.style, cmap='gray')
+            ax3.set_title('Cartoon')
+        if c.ndim == 3:
+            ax2.imshow(c,)
+            ax2.set_title('C(x,y)')
+            ax3.imshow(self.style)
+            ax3.set_title('Cartoon')
         for a in (ax0, ax1, ax2, ax3):
             a.axis('off')
         plt.tight_layout()

@@ -17,10 +17,6 @@ from matplotlib import pyplot as plt
 from matplotlib.gridspec import GridSpec
 from cartoon_effect import cartoon_effect
 
-# global sigx
-# sigx = 0.9
-# global sigb
-# sigb = 0.9
 '''This class is used to create the tkinter window i.e. the GUI. '''
 class MainApplication():
     def __init__(self):
@@ -80,13 +76,16 @@ class MainApplication():
             self.error_message('Error: You must cartoonify an image before trying to save it.')
         else:
             self.sub_window = tk.Tk()
-            out = tk.filedialog.asksaveasfile(parent =self.sub_window, title='Save Image', mode='a')
+            # out = tk.filedialog.asksaveasfile(parent =self.sub_window, title='Save Image', mode='a')
+            out = tk.filedialog.asksaveasfilename(parent =self.sub_window, title='Save Image')
             self.sub_window.destroy()
-            if out.name.lower().endswith(('.jpg', '.png', '.jfif')):
-                io.imsave(out.name, self.cartoon.style)
-            else:
-                add_extension = out.name + '.jpg'
+            if  out.lower().endswith(('.jpg', '.png', '.jfif')):
+                io.imsave(out, self.cartoon.style)
+            elif not out.lower().endswith(('.jpg', '.png', '.jfif')):
+                add_extension = out + '.jpg'
                 io.imsave(add_extension, self.cartoon.style)
+            else:
+                raise TypeError("Unknown")
 
     def sigma(self):
         # function which will get the data from the input fields
